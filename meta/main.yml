@@ -1,0 +1,52 @@
+---
+galaxy_info:
+  author: Andrew Shagayev
+  description: >
+    Configures built-in wireless adapter to have persistent name (wlan0); \
+    Configures external wireless adapters to have presistent names starting from wlan1 \
+      based on MAC address \
+    Sets up built-in wireless adapter to get IP address from DHCP \
+    Sets up wired ethernet adapter to get IP address from DHCP \
+    Sets up wired ethernet adapter to get additional static IP address 192.168.2.2 \
+    Sets up default IP route via 192.168.2.1
+
+  license: MIT
+
+  min_ansible_version: 1.2
+
+  # If this a Container Enabled role, provide the minimum Ansible Container version.
+  # min_ansible_container_version:
+
+  # Optionally specify the branch Galaxy will use when accessing the GitHub
+  # repo for this role. During role install, if no tags are available,
+  # Galaxy will use this branch. During import Galaxy will access files on
+  # this branch. If Travis integration is configured, only notifications for this
+  # branch will be accepted. Otherwise, in all cases, the repo's default branch
+  # (usually master) will be used.
+  #github_branch:
+
+  platforms:
+    - name: Debian
+      versions:
+        - jessie
+    - name: Raspbian
+      versions:
+        - jessie
+    - name: Minibian
+      versions:
+        - jessie
+
+  galaxy_tags:
+    - raspberrry
+    - pi
+    - raspberrypi
+    - minibian
+    - raspbian
+    - network
+    - networking
+    #
+    # NOTE: A tag is limited to a single word comprised of alphanumeric characters.
+    #       Maximum 20 tags per role.
+
+dependencies: []
+...

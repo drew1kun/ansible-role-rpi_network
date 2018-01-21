@@ -1,0 +1,12 @@
+---
+# handlers file for expandfs
+
+- name: Reload networking service and systemd daemon
+  systemd:
+    name: networking
+    daemon_reload: yes
+    enabled: yes
+    state: reloaded
+  tags:
+    - network
+...
