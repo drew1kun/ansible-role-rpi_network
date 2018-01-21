@@ -14,7 +14,10 @@ This role does the following:
 Requirements
 ------------
 
-No special requirements
+One of the following OS (or deriviatives):
+ - Debian
+ - Raspbian
+ - Minibian
 
 Role Variables
 --------------
