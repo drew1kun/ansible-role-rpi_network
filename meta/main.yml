@@ -1,14 +1,7 @@
 ---
 galaxy_info:
   author: Andrew Shagayev
-  description: >
-    Configures built-in wireless adapter to have persistent name (wlan0); \
-    Configures external wireless adapters to have presistent names starting from wlan1 \
-      based on MAC address \
-    Sets up built-in wireless adapter to get IP address from DHCP \
-    Sets up wired ethernet adapter to get IP address from DHCP \
-    Sets up wired ethernet adapter to get additional static IP address 192.168.2.2 \
-    Sets up default IP route via 192.168.2.1
+  description: Raspberrypi 3 basic network configuration
 
   license: MIT
 
@@ -27,12 +20,6 @@ galaxy_info:
 
   platforms:
     - name: Debian
-      versions:
-        - jessie
-    - name: Raspbian
-      versions:
-        - jessie
-    - name: Minibian
       versions:
         - jessie
 
