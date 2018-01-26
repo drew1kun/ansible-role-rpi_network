@@ -34,7 +34,7 @@ Example Playbook
 
     - hosts: rpi_3
       roles:
-         - rpi3_network
+         - drewshg312.rpi3_network
 
 License
 -------
