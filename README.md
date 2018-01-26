@@ -1,5 +1,8 @@
-rpi3_network
+Ansible role: rpi3_network
 =========
+
+[![MIT licensed][mit-badge]][mit-link]
+[![Galaxy Role][role-badge]][galaxy-link]
 
 This role does the following:
 
@@ -27,7 +30,7 @@ No variable settings required
 Dependencies
 ------------
 
-Does not depend on other roles
+None
 
 Example Playbook
 ----------------
@@ -39,9 +42,14 @@ Example Playbook
 License
 -------
 
-MIT
+[MIT][mit-link]
 
 Author Information
 ------------------
 
-Andrew Shagayev
+![Andrew Shagayev](drewshg@gmail.com)
+
+[role-badge]: https://img.shields.io/badge/role-drew--kun.rpi3__network-green.svg
+[galaxy-link]: https://galaxy.ansible.com/drew-kun/rpi3_network/
+[mit-badge]: https://img.shields.io/badge/license-MIT-blue.svg
+[mit-link]: https://raw.githubusercontent.com/drew-kun/ansible-rpi3_network/master/LICENSE
