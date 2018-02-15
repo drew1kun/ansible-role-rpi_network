@@ -1,5 +1,5 @@
 ---
-# handlers file for expandfs
+# handlers file for rpi3_network
 
 - name: Reload networking service and systemd daemon
   systemd:
@@ -8,6 +8,4 @@
     enabled: yes
     state: reloaded
   become: yes
-  tags:
-    - network
 ...
