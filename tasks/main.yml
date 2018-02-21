@@ -16,6 +16,7 @@
     regexp: '^(KERNEL!=".*$)'
     replace: '#\1'
   when: result|failed     # first method to set condition
+  notify: Restart networking service
   become: yes
   tags:
     - network
@@ -26,6 +27,7 @@
     insertafter: '^#KERNEL!=".*$'
     line: 'KERNEL!="eth*[1-9]|ath*|wlan*[1-9]|msh*|ra*|sta*|ctc*|lcs*|hsi*" \'
   when: result.rc != 0    # second method to set condition
+  notify: Restart networking service
   become: yes
   tags:
     - network
@@ -34,8 +36,8 @@
   copy:
     src: interfaces
     dest: /etc/network/interfaces
-  become: yes
   notify: Restart networking service
+  become: yes
   tags:
     - network
 
