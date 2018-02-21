@@ -35,7 +35,7 @@
     src: interfaces
     dest: /etc/network/interfaces
   become: yes
-  notify: Reload networking service and systemd daemon
+  notify: Restart networking service
   tags:
     - network
 

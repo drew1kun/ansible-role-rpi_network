@@ -7,5 +7,13 @@
     daemon_reload: yes
     enabled: yes
     state: reloaded
+  listen: Restart networking service
+  become: yes
+
+- name: Restart networking service
+  service: networking
+    state: restarted
+    enabled: yes
+  listen: Restart networking service
   become: yes
 ...
