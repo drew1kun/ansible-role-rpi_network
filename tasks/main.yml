@@ -10,7 +10,7 @@
   tags:
     - network
 
-- name: '[main] Commenting old pattern in 75-persistent-net-generator.rules'
+- name: '[main] Comment old pattern in 75-persistent-net-generator.rules'
   replace:
     path: /lib/udev/rules.d/75-persistent-net-generator.rules
     regexp: '^(KERNEL!=".*$)'
@@ -21,7 +21,7 @@
   tags:
     - network
 
-- name: '[main] Inserting right pattern into 75-persistent-net-generator.rules'
+- name: '[main] Insert right pattern into 75-persistent-net-generator.rules'
   lineinfile:
     path: /lib/udev/rules.d/75-persistent-net-generator.rules
     insertafter: '^#KERNEL!=".*$'
@@ -32,7 +32,7 @@
   tags:
     - network
 
-- name: '[main] Copying /etc/network/interfaces'
+- name: '[main] Generate /etc/network/interfaces'
   template:
     src: interfaces.j2
     dest: /etc/network/interfaces
