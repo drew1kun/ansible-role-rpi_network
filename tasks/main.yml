@@ -33,8 +33,8 @@
     - network
 
 - name: '[main] Copying /etc/network/interfaces'
-  copy:
-    src: interfaces
+  template:
+    src: interfaces.j2
     dest: /etc/network/interfaces
   notify: Restart networking service
   become: yes

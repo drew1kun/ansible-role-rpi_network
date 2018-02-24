@@ -1,0 +1,9 @@
+# defaults file for rpi3_network
+
+rpi3_network_LAN: eth0
+rpi3_network_WLAN: wlan0
+
+rpi3_network_LAN_ip: 192.168.2.2
+rpi3_network_LAN_netmask: 255.255.255.0
+rpi3_network_LAN_gw: 192.168.2.1
+

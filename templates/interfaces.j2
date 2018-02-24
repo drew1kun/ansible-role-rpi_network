@@ -1,0 +1,18 @@
+auto lo
+iface lo inet loopback
+
+allow-hotplug {{ rpi3_network_LAN }}
+iface {{ rpi3_network_LAN }} inet dhcp
+
+auto {{ rpi3_network_LAN }}:1
+iface {{ rpi3_network_LAN }}:1 inet static
+    address {{ rpi3_network_LAN_ip }}
+	netmask {{ rpi3_network_LAN_netmask }}
+    #dns-nameservers 127.0.0.1
+	post up ip route add default via {{ rpi3_network_LAN_gw }}
+
+auto {{ rpi3_network_WLAN }}
+iface {{ rpi3_network_WLAN }} inet manual
+    wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
+
+iface default inet dhcp
