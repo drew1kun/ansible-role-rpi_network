@@ -1,12 +1,12 @@
 ---
 # handlers file for rpi3_network
 
-- name: Reload systemd daemon
+- name: 'Reload systemd daemon'
   systemd: daemon_reload=yes
   listen: Restart networking service
   become: yes
 
-- name: Restart networking service
+- name: 'Restart networking service'
   service:
     name: networking
     state: restarted
