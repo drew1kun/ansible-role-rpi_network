@@ -24,20 +24,25 @@ One of the following OS (or deriviatives):
 
 Role Variables
 --------------
-
-No variable settings required
+| Variables | Description | Default|
+|-----------|-------------|--------|
+| **rpi3_network_LAN** | Wired LAN interface | eth0 |
+| **rpi3_network_WLAN** | Wireless LAN interface | wlan0 |
+| **rpi3_network_LAN_ip** | LAN interface IP address | 192.168.2.2 |
+| **rpi3_network_LAN_netmask** | LAN interface subnet mask | 255.255.255.0 |
+| **rpi3_network_LAN_gw** | Default Gateway IP address for LAN interface | 192.168.2.1 |
 
 Dependencies
 ------------
 
 None
 
-Example Playbook
+Example Playboouk
 ----------------
 
     - hosts: rpi_3
       roles:
-         - drewshg312.rpi3_network
+         - { role: drewshg312.rpi3_network, rpi3_network_LAN_ip: 10.0.0.1, rpi3_network_LAN: 10.0.0.254 }
 
 License
 -------
