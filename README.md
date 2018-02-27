@@ -16,9 +16,7 @@ Requirements
 ------------
 
 One of the following OS (or deriviatives):
- - Debian
- - Raspbian
- - Minibian
+ - Debian jessie (Raspbian, Minibian)
 
 Role Variables
 --------------
