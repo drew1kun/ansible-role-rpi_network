@@ -6,13 +6,11 @@ Ansible role: rpi3_network
 
 This role does the following:
 
- - Configures built-in wireless adapter to have persistent name (wlan0);
- - Configures external wireless adapters to have presistent names starting from wlan1
- - based on MAC address
- - Sets up built-in wireless adapter to get IP address from DHCP
+ - Configures wireless adapters (built in and external USB) to have persistent names (wlan0, wlan1 etc.) based on MAC addresses
+ - Sets up wireless adapter to get IP address from DHCP
  - Sets up wired ethernet adapter to get IP address from DHCP
- - Sets up wired ethernet adapter to get additional static IP address 192.168.2.2
- - Sets up default IP route via 192.168.2.1
+ - Sets up wired ethernet adapter to get additional static IP address
+ - Sets up default IP route via configured default gateway
 
 Requirements
 ------------
@@ -28,7 +26,7 @@ Role Variables
 |-----------|-------------|--------|
 | **rpi3_network_LAN** | Wired LAN interface | eth0 |
 | **rpi3_network_WLAN** | Wireless LAN interface | wlan0 |
-| **rpi3_network_LAN_ip** | LAN interface IP address | 192.168.2.2 |
+| **rpi3_network_LAN_ip** | LAN interface Static IP address | 192.168.2.2 |
 | **rpi3_network_LAN_netmask** | LAN interface subnet mask | 255.255.255.0 |
 | **rpi3_network_LAN_gw** | Default Gateway IP address for LAN interface | 192.168.2.1 |
 
