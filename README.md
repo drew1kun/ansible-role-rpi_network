@@ -15,6 +15,8 @@ This role does the following:
 Requirements
 ------------
 
+NOTE: Role requires Fact Gathering by ansible!
+
 One of the following OS (or deriviatives):
  - Debian jessie (Raspbian, Minibian)
 
@@ -37,6 +39,7 @@ Example Playboouk
 ----------------
 
     - hosts: rpi_3
+      gather_facts: yes
       roles:
          - { role: drewshg312.rpi3_network, rpi3_network_LAN_ip: 10.0.0.1, rpi3_network_LAN: 10.0.0.254 }
 
