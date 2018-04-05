@@ -7,7 +7,7 @@
   ignore_errors: yes
   changed_when: false
   become: yes
-    - ansible_distribution_version < 9  # before 'raspbian stretch'
+  when: ansible_distribution_version < 9  # before 'raspbian stretch'
   tags:
     - network
 
