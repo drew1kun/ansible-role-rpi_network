@@ -18,8 +18,8 @@
     replace: '#\1'
   become: yes
   when:
-    - result|failed     # first method to set condition
     - ansible_distribution_version < 9  # before 'raspbian stretch'
+    - result|failed     # first method to set condition
   notify: Restart networking service
   tags:
     - network
@@ -31,8 +31,8 @@
     line: 'KERNEL!="eth*[1-9]|ath*|wlan*[1-9]|msh*|ra*|sta*|ctc*|lcs*|hsi*" \'
   become: yes
   when:
-    - result.rc != 0    # second method to set condition
     - ansible_distribution_version < 9  # before 'raspbian stretch'
+    - result|failed     # first method to set condition
   notify: Restart networking service
   tags:
     - network
