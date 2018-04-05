@@ -7,6 +7,7 @@
   ignore_errors: yes
   changed_when: false
   become: yes
+    - ansible_distribution_version < 9  # before 'raspbian stretch'
   tags:
     - network
 
@@ -15,9 +16,11 @@
     path: /lib/udev/rules.d/75-persistent-net-generator.rules
     regexp: '^(KERNEL!=".*$)'
     replace: '#\1'
-  when: result|failed     # first method to set condition
-  notify: Restart networking service
   become: yes
+  when:
+    - result|failed     # first method to set condition
+    - ansible_distribution_version < 9  # before 'raspbian stretch'
+  notify: Restart networking service
   tags:
     - network
 
@@ -26,9 +29,11 @@
     path: /lib/udev/rules.d/75-persistent-net-generator.rules
     insertafter: '^#KERNEL!=".*$'
     line: 'KERNEL!="eth*[1-9]|ath*|wlan*[1-9]|msh*|ra*|sta*|ctc*|lcs*|hsi*" \'
-  when: result.rc != 0    # second method to set condition
-  notify: Restart networking service
   become: yes
+  when:
+    - result.rc != 0    # second method to set condition
+    - ansible_distribution_version < 9  # before 'raspbian stretch'
+  notify: Restart networking service
   tags:
     - network
 
