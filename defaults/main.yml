@@ -1,3 +1,4 @@
+---
 # defaults file for rpi3_network
 
 rpi3_network_LAN: eth0
@@ -7,3 +8,21 @@ rpi3_network_LAN_ip: 192.168.2.2
 rpi3_network_LAN_netmask: 255.255.255.0
 rpi3_network_LAN_gw: 192.168.2.1
 
+
+# WPA Supplicant
+rpi3_network_wpa_supplicant: yes
+
+rpi3_network_wpa_supplicant_conf: /etc/wpa_supplicant/wpa_supplicant.conf
+
+# The list of wifi networks to be configured in wpa_supplicant.conf
+# if no id_str specified, it will be set to 'default' in /etc/network/interfaces
+rpi3_network_wifi_APs:
+  - id_str: "{{ vault_rpi3_network_wifi_APs[0].id_str }}"   # the first network will be added to /etc/network/interfaces
+    essid: "{{ vault_rpi3_network_wifi_APs[0].essid }}"
+    passphrase: "{{ vault_rpi3_network_wifi_APs[0].passphrase }}"
+
+  - id_str: "{{ vault_rpi3_network_wifi_APs[1].id_str }}"
+    essid: "{{ vault_rpi3_network_wifi_APs[1].essid }}"
+    passphrase: "{{ vault_rpi3_network_wifi_APs[1].passphrase }}"
+
+...

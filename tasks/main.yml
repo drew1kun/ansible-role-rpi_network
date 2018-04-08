@@ -1,4 +1,6 @@
 ---
+# tasks file for rpi3_network
+
 - name: '[main] == RED OUTPUT IS OK == Check /lib/udev/rules.d/75-persistent-net-generator.rules == RED OUTPUT IS OK =='
   command: >
     fgrep -q 'KERNEL!="eth*[1-9]|ath*|wlan*[1-9]|msh*|ra*|sta*|ctc*|lcs*|hsi*"' \
@@ -45,6 +47,10 @@
   become: yes
   tags:
     - network
+
+- name: '[main] Include tasks from wpa_supplicant.yml'
+  include_tasks: wpa_supplicant.yml
+  when: rpi3_network_wpa_supplicant
 
 - meta: flush_handlers
   tags:

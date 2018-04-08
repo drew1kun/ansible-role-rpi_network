@@ -1,0 +1,9 @@
+#If no 'id_str' given, the value will be default
+{% for AP in rpi3_network_psk.results %}
+{{ AP.stdout_lines[1] }}
+{{ AP.stdout_lines[2] }}
+{{ AP.stdout_lines[4] }}
+	id_str="{{ AP.item.id_str }}"
+{{ AP.stdout_lines[5] }}
+
+{% endfor %}

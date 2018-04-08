@@ -1,0 +1,25 @@
+---
+- name: "[wpa_supplicant] Include tasks from dependencies.yml"
+  include_tasks: dependencies.yml
+
+- name: "[wpa_supplicant] Encode passphrases to 254 bit PSK"
+  shell: echo {{ item.passphrase }} | wpa_passphrase {{ item.essid }}
+  register: rpi3_network_psk
+  with_items: rpi3_network_wifi_APs
+  changed_when: false
+
+- name: "[wpa_supplicant] Generate {{ rpi3_network_wpa_supplicant_conf }}"
+  template:
+    src: wpa_supplicant_conf.j2
+    dest: {{ rpi3_network_wpa_supplicant_conf }}
+    mode: 0644
+    owner: root
+    group: root
+  become: yes
+
+#- name: "[wpa_supplicant] Start WPA Supplicant"
+#  command: wpa_supplicant -B -D nl80211 -i {{ rpi3_network_WLAN }} -c {{ rpi3_network_wpa_supplicant_conf }}
+
+#- name: "[wpa_supplicant] Connect to {{ rpi3_network_wifi_APs[0].essid }} wifi network"
+#  command: wpa_cli select_network {{ rpi3_network_wifi_APs[0].essid }}
+...

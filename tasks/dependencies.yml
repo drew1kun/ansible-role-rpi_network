@@ -1,0 +1,5 @@
+---
+- name: '[dependencies] Install wpa-supplicant package'
+  apt: name=wpasupplicant state=present
+  become: yes
+...
