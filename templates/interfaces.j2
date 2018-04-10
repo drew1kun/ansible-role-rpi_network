@@ -15,6 +15,10 @@ auto {{ rpi3_network_WLAN }}
 iface {{ rpi3_network_WLAN }} inet manual
 	 wpa-roam {{ rpi3_network_wpa_supplicant_conf }}
 
-iface {{ rpi3_network_wifi_APs[0].id_str }} inet dhcp
-#iface default inet dhcp
+{% for wifi_network in rpi3_network_wifi_APs  %}
+{% if wifi_network.id_str != None and wifi_network.id_str != '' %}
+iface {{ wifi_network.id_str }} inet dhcp
+{% endif %}
+{% endfor %}
+iface default inet dhcp
 

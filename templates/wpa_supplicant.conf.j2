@@ -1,9 +1,34 @@
-#If no 'id_str' given, the value will be default
+#If no 'id_str' given, the value will be 'default'
 {% for AP in rpi3_network_psk.results %}
+{# If the passphrase is set - password protected network: #}
+{% if AP.stdout_lines is defined %}
 {{ AP.stdout_lines[1] }}
 {{ AP.stdout_lines[2] }}
+{% if AP.item.hidden %}
+	scan_ssid=1
+{% endif %}
 {{ AP.stdout_lines[4] }}
+{% if AP.item.priority is defined and AP.item.id_str != '' %}
+	priority={{ AP.item.priority }}
+{% endif %}
+{% if AP.item.id_str is defined and AP.item.id_str != '' %}
 	id_str="{{ AP.item.id_str }}"
+{% endif %}
 {{ AP.stdout_lines[5] }}
+{% else %}
+{# If the passphrase is not set - unsecured network: #}
+network={
+	ssid="{{ AP.item.essid }}"
+{% if AP.item.hidden %}
+	scan_ssid=1
+{% endif %}
+	key_mgmt=NONE
+{# must have lowest priority for security purposes #}
+	priority=-999
+{% if AP.item.id_str is defined and AP.item.id_str != '' %}
+	id_str="{{ AP.item.id_str }}"
+{% endif %}
+}
+{% endif %}
 
 {% endfor %}
