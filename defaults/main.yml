@@ -10,7 +10,7 @@ rpi3_network_LAN_gw: 192.168.2.1
 
 
 # WPA Supplicant
-rpi3_network_wpa_supplicant: yes
+rpi3_network_wireless: yes    # Set up wireless? Include wpa_supplicant.yml tasks?
 
 rpi3_network_wpa_supplicant_conf: /etc/wpa_supplicant/wpa_supplicant.conf
 

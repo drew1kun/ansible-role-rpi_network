@@ -11,6 +11,7 @@ iface {{ rpi3_network_LAN }}:1 inet static
 	#dns-nameservers 127.0.0.1
 	post up ip route add default via {{ rpi3_network_LAN_gw }}
 
+{% if rpi3_network_wireless %}
 auto {{ rpi3_network_WLAN }}
 iface {{ rpi3_network_WLAN }} inet manual
 	 wpa-roam {{ rpi3_network_wpa_supplicant_conf }}
@@ -21,4 +22,5 @@ iface {{ wifi_network.id_str }} inet dhcp
 {% endif %}
 {% endfor %}
 iface default inet dhcp
+{% endif %}
 

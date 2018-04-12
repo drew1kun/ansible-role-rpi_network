@@ -1,5 +1,9 @@
 ---
-- name: '[dependencies] Install wpa-supplicant package'
-  package: name=wpasupplicant state=present
+- name: '[dependencies] Install firmware-brcm80211 and wpa-supplicant'
+  package:
+    name:
+      - wpasupplicant
+      - firmware-brcm80211
+    state: present
   become: yes
 ...

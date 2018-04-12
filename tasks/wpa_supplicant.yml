@@ -28,13 +28,30 @@
     owner: root
     group: root
   become: yes
-  notify: Restart networking service
 
-#- name: "[wpa_supplicant] Start WPA Supplicant"
-#  command: wpa_supplicant -B -D nl80211 -i {{ rpi3_network_WLAN }} -c {{ rpi3_network_wpa_supplicant_conf }}
-#  become: yes
+- name: "[wpa_supplicant] Check if {{ rpi3_network_WLAN }} interface exists"
+  command: grep "{{ rpi3_network_WLAN }}" /proc/net/dev
+  register: rpi3_network_wifi_if
+  become: yes
+  failed_when: false
+  changed_when: false
+  #ignore_errors: true
 
-#- name: "[wpa_supplicant] Connect to {{ rpi3_network_wifi_APs[0].essid }} wifi network"
-#  command: wpa_cli select_network {{ rpi3_network_wifi_APs[0].essid }}
-#  become: yes
+# haven't find a solution without reboot
+- name: "[wpa_supplicant] Reboot the managed host for wifi driver to recognize {{ rpi3_network_WLAN }} interface"
+  shell: 'sleep 1 && shutdown -r now "Reboot triggered by Ansible" && sleep 1'
+  async: 1
+  poll: 0
+  become: yes
+  when: rpi3_network_wifi_if.rc != 0
+
+# ansible_ssh_host variable is set in ansible inventory (hosts) file
+- name: "[wpa_supplicant] Waiting for managed host to come back after reboot"
+  local_action:
+    module: wait_for
+      host="{{ ansible_ssh_host }}"
+      port=22
+      delay=1
+  become: no
+  when: rpi3_network_wifi_if.rc != 0
 ...
