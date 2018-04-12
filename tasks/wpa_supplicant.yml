@@ -1,6 +1,8 @@
 ---
 - name: "[wpa_supplicant] Include tasks from dependencies.yml"
   include_tasks: dependencies.yml
+  tags:
+    - rpi3_network
 
 - name: "[wpa_supplicant] Ensure that passphrases have appropriate length or 0 (for unsecured networks)"
   fail:
@@ -9,6 +11,8 @@
   when:
     - item.essid|length != 0  # SSID is required (see wpa_supplicant.conf man pages)
     - ( item.passphrase|length < 8 and item.passphrase|length != 0 ) or item.passphrase|length > 63
+  tags:
+    - rpi3_network
 
 - name: "[wpa_supplicant] Encode passphrases to 254 bit PSK"
   # VERY IMPORTANT: use ' symbols around passphrase variables.
@@ -19,6 +23,8 @@
   changed_when: false
   when:
     - item.passphrase|length != 0
+  tags:
+    - rpi3_network
 
 - name: "[wpa_supplicant] Generate {{ rpi3_network_wpa_supplicant_conf }}"
   template:
@@ -28,6 +34,8 @@
     owner: root
     group: root
   become: yes
+  tags:
+    - rpi3_network
 
 - name: "[wpa_supplicant] Check if {{ rpi3_network_WLAN }} interface exists"
   command: grep "{{ rpi3_network_WLAN }}" /proc/net/dev
@@ -35,6 +43,8 @@
   become: yes
   failed_when: false
   changed_when: false
+  tags:
+    - rpi3_network
 
 # haven't find a solution without reboot
 - name: "[wpa_supplicant] Reboot the managed host for wifi driver to recognize {{ rpi3_network_WLAN }} interface"
@@ -43,6 +53,8 @@
   poll: 0
   become: yes
   when: rpi3_network_wifi_if.rc != 0
+  tags:
+    - rpi3_network
 
 # ansible_ssh_host variable is set in ansible inventory (hosts) file
 - name: "[wpa_supplicant] Waiting for managed host to come back after reboot"
@@ -53,4 +65,6 @@
       delay=1
   become: no
   when: rpi3_network_wifi_if.rc != 0
+  tags:
+    - rpi3_network
 ...
