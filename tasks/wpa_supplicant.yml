@@ -35,7 +35,6 @@
   become: yes
   failed_when: false
   changed_when: false
-  #ignore_errors: true
 
 # haven't find a solution without reboot
 - name: "[wpa_supplicant] Reboot the managed host for wifi driver to recognize {{ rpi3_network_WLAN }} interface"
