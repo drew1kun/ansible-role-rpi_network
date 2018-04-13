@@ -18,17 +18,32 @@ Requirements
 NOTE: Role requires Fact Gathering by ansible!
 
 One of the following OS (or deriviatives):
- - Debian jessie (Raspbian, Minibian)
+ - Debian (Raspbian, Minibian)
+   - jessie
+   - stretch
+
+**ATTENTION!**
+
+**vault_rpi3_network_wifi_APs** var is set in *vars/main.yml*,
+which is encrypted with [ansible-vault][ansible-vault-link].
+
+Before running the role add the following to **ansible.cfg**:
+
+    [defaults]
+    vault_password_file = .vault.key
 
 Role Variables
 --------------
 | Variables | Description | Default|
 |-----------|-------------|--------|
-| **rpi3_network_LAN** | Wired LAN interface | eth0 |
-| **rpi3_network_WLAN** | Wireless LAN interface | wlan0 |
-| **rpi3_network_LAN_ip** | LAN interface Static IP address | 192.168.2.2 |
-| **rpi3_network_LAN_netmask** | LAN interface subnet mask | 255.255.255.0 |
-| **rpi3_network_LAN_gw** | Default Gateway IP address for LAN interface | 192.168.2.1 |
+| **rpi3_network_LAN** | Wired LAN interface | `eth0` |
+| **rpi3_network_WLAN** | Wireless LAN interface | `wlan0` |
+| **rpi3_network_LAN_ip** | LAN interface Static IP address | `192.168.2.2` |
+| **rpi3_network_LAN_netmask** | LAN interface subnet mask | `255.255.255.0` |
+| **rpi3_network_LAN_gw** | Default Gateway IP address for LAN interface | `192.168.2.1` |
+| **rpi3_network_wireless** | Configure wireless connections using wpa_supplicant | `yes` |
+| **rpi3_network_wpa_supplicant_conf** | Path to wpa_supplicant configuration file | `/etc/wpa_supplicant/wpa_supplicant.conf` |
+| **rpi3_network_wifi_APs** | List of wireless Access Points to be configured in wpa_supplicant | see [`defaults/main.yml`](defaults/main.yml) |
 
 Dependencies
 ------------
