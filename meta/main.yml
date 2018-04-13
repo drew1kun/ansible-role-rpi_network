@@ -7,7 +7,7 @@ galaxy_info:
 
   min_ansible_version: 1.2
 
-  github_branch: wpasupplicant
+  github_branch: master
 
   platforms:
     - name: Debian
