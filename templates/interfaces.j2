@@ -15,7 +15,7 @@ iface {{ rpi3_network_LAN }}:1 inet static
 {% if rpi3_network_wireless %}
 auto {{ rpi3_network_WLAN }}
 iface {{ rpi3_network_WLAN }} inet manual
-	 wpa-roam {{ rpi3_network_wpa_supplicant_conf }}
+	wpa-roam {{ rpi3_network_wpa_supplicant_conf }}
 
 {% for wifi_network in rpi3_network_wifi_APs  %}
 {% if wifi_network.id_str != None and wifi_network.id_str != '' %}
