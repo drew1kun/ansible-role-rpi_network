@@ -3,6 +3,7 @@ iface lo inet loopback
 
 allow-hotplug {{ rpi3_network_LAN }}
 iface {{ rpi3_network_LAN }} inet dhcp
+iface {{ rpi3_network_LAN }} inet6 auto
 
 auto {{ rpi3_network_LAN }}:1
 iface {{ rpi3_network_LAN }}:1 inet static
