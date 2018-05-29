@@ -21,6 +21,7 @@
   register: rpi3_network_psk
   with_items: "{{ rpi3_network_wifi_APs }}"
   changed_when: false
+  no_log: yes  # Don't output the WPA passphrases
   when:
     - item.passphrase|length != 0
   tags:
