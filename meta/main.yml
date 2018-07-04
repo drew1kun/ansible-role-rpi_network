@@ -1,5 +1,6 @@
 ---
 galaxy_info:
+  role_name: rpi3_network
   author: Andrew Shagayev
   description: Raspberrypi 3 basic network configuration
 
