@@ -56,7 +56,7 @@ Example Playboouk
     - hosts: rpi_3
       gather_facts: yes
       roles:
-         - { role: drew_kun.rpi3_network, rpi3_network_LAN_ip: 10.0.0.1, rpi3_network_LAN: 10.0.0.254 }
+         - { role: drew-kun.rpi3_network, rpi3_network_LAN_ip: 10.0.0.1, rpi3_network_LAN: 10.0.0.254 }
 
 License
 -------
@@ -68,7 +68,7 @@ Author Information
 
 Andrew Shagayev | [e-mail](mailto:drewshg@gmail.com)
 
-[role-badge]: https://img.shields.io/badge/role-drew__kun.rpi3__network-green.svg
-[galaxy-link]: https://galaxy.ansible.com/drew_kun/rpi3_network/
+[role-badge]: https://img.shields.io/badge/role-drew--kun.rpi3__network-green.svg
+[galaxy-link]: https://galaxy.ansible.com/drew-kun/rpi3_network/
 [mit-badge]: https://img.shields.io/badge/license-MIT-blue.svg
-[mit-link]: https://raw.githubusercontent.com/drew_kun/ansible-rpi3_network/master/LICENSE
+[mit-link]: https://raw.githubusercontent.com/drew-kun/ansible-rpi3_network/master/LICENSE
