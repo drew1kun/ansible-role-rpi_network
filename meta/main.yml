@@ -15,8 +15,6 @@ galaxy_info:
         - jessie
 
   galaxy_tags:
-    - raspberrry
-    - pi
     - raspberrypi
     - minibian
     - raspbian
