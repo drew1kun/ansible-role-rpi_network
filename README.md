@@ -57,7 +57,7 @@ Example Playboouk
 - hosts: rpi_3
   gather_facts: yes
   roles:
-     - { role: drew-kun.rpi3_network, rpi3_network_LAN_ip: 10.0.0.1, rpi3_network_LAN: 10.0.0.254 }
+  - { role: drew-kun.rpi3_network, rpi3_network_LAN_ip: 10.0.0.1, rpi3_network_LAN: 10.0.0.254 }
 ```
 
 License
