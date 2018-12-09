@@ -22,18 +22,6 @@ One of the following OS (or deriviatives):
    - jessie
    - stretch
 
-**ATTENTION!**
-If **rpi3_network_wireless** is set to `yes`, then
-make sure you override the **vault_rpi3_network_wifi_APs** var as it contains a sensitive data for your wireless networks,
-such as WPA passphrase and network ESSID...
-
-It is highly recommended to encrypt with [ansible-vault][ansible-vault-link].
-
-Before running any playbook which uses this role, add the following to **ansible.cfg**:
-
-    [defaults]
-    vault_password_file = .vault.key
-
 Role Variables
 --------------
 | Variables | Description | Default|
@@ -46,6 +34,19 @@ Role Variables
 | **rpi3_network_wireless** | Configure wireless connections using wpa_supplicant | `yes` |
 | **rpi3_network_wpa_supplicant_conf** | Path to wpa_supplicant configuration file | `/etc/wpa_supplicant/wpa_supplicant.conf` |
 | **rpi3_network_wifi_APs** | List of wireless Access Points to be configured in wpa_supplicant | see [`defaults/main.yml`](defaults/main.yml) |
+
+
+**ATTENTION!**
+If **rpi3_network_wireless** is set to `yes`, then
+make sure you override the **vault_rpi3_network_wifi_APs** var as it contains a sensitive data for your wireless networks,
+such as WPA passphrase and network ESSID...
+
+It is highly recommended to encrypt with [ansible-vault][ansible-vault-link].
+
+Before running any playbook which uses this role, add the following to **ansible.cfg**:
+
+    [defaults]
+    vault_password_file = .vault.key
 
 Dependencies
 ------------
