@@ -33,7 +33,7 @@ Role Variables
 | **rpi3_network_LAN_gw** | Default Gateway IP address for LAN interface | `192.168.2.1` |
 | **rpi3_network_wireless** | Configure wireless connections using wpa_supplicant | `yes` |
 | **rpi3_network_wpa_supplicant_conf** | Path to wpa_supplicant configuration file | `/etc/wpa_supplicant/wpa_supplicant.conf` |
-| **rpi3_network_wifi_APs** | List of wireless Access Points to be configured in wpa_supplicant | see [`defaults/main.yml`](defaults/main.yml) |
+| **rpi3_network_wifi_APs** | List of wireless Access Points to be configured in wpa_supplicant | see [`defaults/main.yml`](defaults/main.yml#L20) |
 
 
 **ATTENTION!**
