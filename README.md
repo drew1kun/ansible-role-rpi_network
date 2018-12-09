@@ -23,11 +23,13 @@ One of the following OS (or deriviatives):
    - stretch
 
 **ATTENTION!**
+If **rpi3_network_wireless** is set to `yes`, then
+make sure you override the **vault_rpi3_network_wifi_APs** var as it contains a sensitive data for your wireless networks,
+such as WPA passphrase and network ESSID...
 
-**vault_rpi3_network_wifi_APs** var is set in *vars/main.yml*,
-which is encrypted with [ansible-vault][ansible-vault-link].
+It is highly recommended to encrypt with [ansible-vault][ansible-vault-link].
 
-Before running the role add the following to **ansible.cfg**:
+Before running any playbook which uses this role, add the following to **ansible.cfg**:
 
     [defaults]
     vault_password_file = .vault.key
@@ -56,8 +58,30 @@ Example Playboouk
 ```yaml
 - hosts: rpi_3
   gather_facts: yes
+
+  vars_files:
+  - vars/vault.yml
+
   roles:
-  - { role: drew-kun.rpi3_network, rpi3_network_LAN_ip: 10.0.0.1, rpi3_network_LAN: 10.0.0.254 }
+  - role: drew-kun.rpi3_network
+    rpi3_network_LAN_ip: 10.0.0.1
+    rpi3_network_LAN: 10.0.0.254
+    rpi3_network_wifi_APs:
+    - id_str: home
+      hidden: no
+      essid: "{{ vault_bootstrap_core__rpi3_network_wifi_APs[0].essid }}"
+      passphrase: "{{ vault_bootstrap_core__rpi3_network_wifi_APs[0].passphrase }}"
+      priority: 10
+    when: ansible_os_family == 'Debian'
+```
+
+*vars/vault.yml*:
+
+```yaml
+vault_bootstrap_core__rpi3_network_wifi_APs:
+# only sensitive stuff goes here:
+- essid: YourSensitiveESSID
+  passphrase: YourSecureWPA_Passphrase
 ```
 
 License

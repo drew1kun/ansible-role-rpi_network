@@ -16,18 +16,12 @@ rpi3_network_wpa_supplicant_conf: /etc/wpa_supplicant/wpa_supplicant.conf
 
 # The list of wifi networks to be configured in wpa_supplicant.conf
 # if no id_str specified, it will be set to 'default' in /etc/network/interfaces
+# NOTE: please make sure you override this in your playbooks and encrypt all sensetive data with ansible-vault
 rpi3_network_wifi_APs:
-  - id_str: home
-    hidden: no   # yes | no
-    essid: "{{ vault_rpi3_network_wifi_APs[0].essid }}"  # requried
-    passphrase: "{{ vault_rpi3_network_wifi_APs[0].passphrase }}"  # can be 8-63 chars or empty (for unsecured networks)
-    priority: 10  # when multiple networks are available, the one with the highest priority value is selected
-                  # if the network is unsecured, then it's priority will be -999
-
-  - id_str: smartphone_hotspot
-    hidden: no
-    essid: "{{ vault_rpi3_network_wifi_APs[1].essid }}"
-    passphrase: "{{ vault_rpi3_network_wifi_APs[1].passphrase }}"
-    priority: 1
-
+- id_str: home
+  hidden: no            # yes | no
+  essid: home_wifi      # requried
+  passphrase: P@$$w0rd  # can be 8-63 chars or empty (for unsecured networks)
+  priority: 10  # when multiple networks are available, the one with the highest priority value is selected
+                # if the network is unsecured, then it's priority will be -999
 ...
