@@ -4,8 +4,7 @@
 - name: '[main] Check if /lib/udev/rules.d/75-persistent-net-generator.rules exists'
   stat: path=/lib/udev/rules.d/75-persistent-net-generator.rules
   register: rpi3_network_75_persistent_net_generator_rules
-  tags:
-    - rpi3_network
+  tags: rpi3_network
 
 - name: '[main] Check /lib/udev/rules.d/75-persistent-net-generator.rules'
   command: >
@@ -17,8 +16,7 @@
   changed_when: false
   become: yes
   when: rpi3_network_75_persistent_net_generator_rules.stat.exists
-  tags:
-    - rpi3_network
+  tags: rpi3_network
 
 - name: '[main] Comment old pattern in 75-persistent-net-generator.rules'
   replace:
@@ -27,11 +25,10 @@
     replace: '#\1'
   become: yes
   when:
-    - rpi3_network_75_persistent_net_generator_rules.stat.exists
-    - result.rc != 0 # result|failed can't be used because we use failed_when: false
+  - rpi3_network_75_persistent_net_generator_rules.stat.exists
+  - result.rc != 0 # result|failed can't be used because we use failed_when: false
   notify: Restart networking service
-  tags:
-    - rpi3_network
+  tags: rpi3_network
 
 - name: '[main] Insert right pattern into 75-persistent-net-generator.rules'
   lineinfile:
@@ -40,11 +37,10 @@
     line: 'KERNEL!="eth*[1-9]|ath*|wlan*[1-9]|msh*|ra*|sta*|ctc*|lcs*|hsi*" \'
   become: yes
   when:
-    - rpi3_network_75_persistent_net_generator_rules.stat.exists
-    - result.rc != 0
+  - rpi3_network_75_persistent_net_generator_rules.stat.exists
+  - result.rc != 0
   notify: Restart networking service
-  tags:
-    - rpi3_network
+  tags: rpi3_network
 
 - name: '[main] Generate /etc/network/interfaces'
   template:
@@ -52,16 +48,13 @@
     dest: /etc/network/interfaces
   notify: Restart networking service
   become: yes
-  tags:
-    - rpi3_network
+  tags: rpi3_network
 
 - name: '[main] Include tasks from wpa_supplicant.yml'
   include_tasks: wpa_supplicant.yml
   when: rpi3_network_wireless
-  tags:
-    - rpi3_network
+  tags: rpi3_network
 
 - meta: flush_handlers
-  tags:
-    - rpi3_network
+  tags: rpi3_network
 ...
