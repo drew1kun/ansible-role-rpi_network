@@ -2,11 +2,13 @@
 - name: '[dependencies] Install firmware-brcm80211 and wpa-supplicant'
   package:
     name:
-      - wpasupplicant
-      - firmware-brcm80211
+    - wpasupplicant
+    - firmware-brcm80211
     state: present
+  register: rpi3_network_dep_result
+  until: rpi3_network_dep_result is succeeded
   become: yes
   tags:
-    - rpi3_network
-    - rpi3_network_dependencies
+  - rpi3_network
+  - rpi3_network_dependencies
 ...
