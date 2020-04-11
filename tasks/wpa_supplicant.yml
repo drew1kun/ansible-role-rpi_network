@@ -1,6 +1,6 @@
 ---
-- name: "[wpa_supplicant] Include tasks from dependencies.yml"
-  include_tasks: dependencies.yml
+- name: "[wpa_supplicant] Import tasks from dependencies.yml"
+  import_tasks: dependencies.yml
   tags: rpi3_network
 
 - name: "[wpa_supplicant] Ensure that passphrases have appropriate length or 0 (for unsecured networks)"
