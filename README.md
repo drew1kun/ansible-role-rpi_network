@@ -64,7 +64,7 @@ Example Playboouk
   - vars/vault.yml
 
   roles:
-  - role: drew-kun.rpi3_network
+  - role: drew1kun.rpi3_network
     rpi3_network_LAN_ip: 10.0.0.1
     rpi3_network_LAN: 10.0.0.254
     rpi3_network_wifi_APs:
@@ -96,6 +96,6 @@ Author Information
 Andrew Shagayev | [e-mail](mailto:drewshg@gmail.com)
 
 [role-badge]: https://img.shields.io/badge/role-drew--kun.rpi3__network-green.svg
-[galaxy-link]: https://galaxy.ansible.com/drew-kun/rpi3_network/
+[galaxy-link]: https://galaxy.ansible.com/drew1kun/rpi3_network/
 [mit-badge]: https://img.shields.io/badge/license-MIT-blue.svg
-[mit-link]: https://raw.githubusercontent.com/drew-kun/ansible-rpi3_network/master/LICENSE
+[mit-link]: https://raw.githubusercontent.com/drew1kun/ansible-rpi3_network/master/LICENSE

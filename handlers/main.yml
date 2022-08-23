@@ -15,4 +15,3 @@
   listen: Restart networking service
   become: yes
   when: rpi3_network_wifi_if is not defined or rpi3_network_wifi_if.rc == 0
-...

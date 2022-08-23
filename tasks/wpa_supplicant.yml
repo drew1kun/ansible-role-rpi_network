@@ -62,4 +62,3 @@
   become: no
   when: rpi3_network_wifi_if.rc != 0
   tags: rpi3_network
-...

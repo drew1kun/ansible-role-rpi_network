@@ -24,4 +24,3 @@ rpi3_network_wifi_APs:
   passphrase: P@$$w0rd  # can be 8-63 chars or empty (for unsecured networks)
   priority: 10  # when multiple networks are available, the one with the highest priority value is selected
                 # if the network is unsecured, then it's priority will be -999
-...
