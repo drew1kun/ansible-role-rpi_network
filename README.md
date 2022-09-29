@@ -74,8 +74,8 @@ Example Playboouk
     rpi_network_wifi_APs:
     - id_str: home
       hidden: no
-      essid: "{{ vault_bootstrap_core__rpi_network_wifi_APs[0].essid }}"
-      passphrase: "{{ vault_bootstrap_core__rpi_network_wifi_APs[0].passphrase }}"
+      essid: "{{ vault_rpi_bootstrap__rpi_network_wifi_APs[0].essid }}"
+      passphrase: "{{ vault_rpi_bootstrap__rpi_network_wifi_APs[0].passphrase }}"
       priority: 10
     when: ansible_os_family == 'Debian'
 ```
@@ -83,7 +83,7 @@ Example Playboouk
 *vars/vault.yml*:
 
 ```yaml
-vault_bootstrap_core__rpi_network_wifi_APs:
+vault_rpi_bootstrap__rpi_network_wifi_APs:
 # only sensitive stuff goes here:
 - essid: YourSensitiveESSID
   passphrase: YourSecureWPA_Passphrase
