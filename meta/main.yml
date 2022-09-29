@@ -2,7 +2,7 @@
 galaxy_info:
   role_name: rpi_network
   author: Andrew Shagayev
-  description: Raspberry Pi basic network configuration
+  description: Ansible role for Raspberry Pi basic network configuration.
 
   license: MIT
 
