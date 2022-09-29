@@ -10,7 +10,7 @@ rpi_network_LAN_gw: 192.168.3.1
 
 
 # WPA Supplicant
-rpi_network_wireless: yes    # Set up wireless? Include wpa_supplicant.yml tasks?
+rpi_network_wireless: true    # Set up wireless? Include wpa_supplicant.yml tasks?
 
 rpi_network_wpa_supplicant_conf: /etc/wpa_supplicant/wpa_supplicant.conf
 
@@ -19,7 +19,7 @@ rpi_network_wpa_supplicant_conf: /etc/wpa_supplicant/wpa_supplicant.conf
 # NOTE: please make sure you override this in your playbooks and encrypt all sensetive data with ansible-vault
 rpi_network_wifi_APs:
 - id_str: home
-  hidden: no            # yes | no
+  hidden: false         # true | false
   essid: home_wifi      # requried
   passphrase: P@$$w0rd  # can be 8-63 chars or empty (for unsecured networks)
   priority: 10  # when multiple networks are available, the one with the highest priority value is selected
