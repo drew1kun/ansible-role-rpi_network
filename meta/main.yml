@@ -2,7 +2,7 @@
 galaxy_info:
   role_name: rpi_network
   author: Andrew Shagayev
-  description: Raspberrypi 3 basic network configuration
+  description: Raspberry Pi basic network configuration
 
   license: MIT
 
@@ -17,6 +17,7 @@ galaxy_info:
 
   galaxy_tags:
     - raspberrypi
+    - raspberry_pi_os
     - minibian
     - raspbian
     - network
