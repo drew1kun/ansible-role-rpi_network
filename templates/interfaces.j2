@@ -1,23 +1,44 @@
+{#
+# DEFAULT SETTINGS WILL LOOK SIMILAR TO THE FOLLOWING:
 auto lo
 iface lo inet loopback
 
-allow-hotplug {{ rpi3_network_LAN }}
-iface {{ rpi3_network_LAN }} inet dhcp
-iface {{ rpi3_network_LAN }} inet6 auto
+allow-hotplug eth0
+iface eth0 inet dhcp
 
-auto {{ rpi3_network_LAN }}:1
-iface {{ rpi3_network_LAN }}:1 inet static
-	address {{ rpi3_network_LAN_ip }}
-	netmask {{ rpi3_network_LAN_netmask }}
+auto eth0:1
+iface eth0:1 inet static
+    address 192.168.2.2
+    netmask 255.255.255.0
+    #dns-nameservers 127.0.0.1
+    post up ip route add default via 192.168.2.1
+
+auto wlan0
+iface wlan0 inet manual
+    wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
+
+iface default inet dhcp
+#}
+auto lo
+iface lo inet loopback
+
+allow-hotplug {{ rpi_network_LAN }}
+iface {{ rpi_network_LAN }} inet dhcp
+iface {{ rpi_network_LAN }} inet6 auto
+
+auto {{ rpi_network_LAN }}:1
+iface {{ rpi_network_LAN }}:1 inet static
+	address {{ rpi_network_LAN_ip }}
+	netmask {{ rpi_network_LAN_netmask }}
 	#dns-nameservers 127.0.0.1
-	post up ip route add default via {{ rpi3_network_LAN_gw }}
+	post up ip route add default via {{ rpi_network_LAN_gw }}
 
-{% if rpi3_network_wireless %}
-auto {{ rpi3_network_WLAN }}
-iface {{ rpi3_network_WLAN }} inet manual
-	wpa-roam {{ rpi3_network_wpa_supplicant_conf }}
+{% if rpi_network_wireless %}
+auto {{ rpi_network_WLAN }}
+iface {{ rpi_network_WLAN }} inet manual
+	wpa-roam {{ rpi_network_wpa_supplicant_conf }}
 
-{% for wifi_network in rpi3_network_wifi_APs  %}
+{% for wifi_network in rpi_network_wifi_APs  %}
 {% if wifi_network.id_str != None and wifi_network.id_str != '' %}
 iface {{ wifi_network.id_str }} inet dhcp
 {% endif %}

@@ -5,9 +5,9 @@
     - wpasupplicant
     - firmware-brcm80211
     state: present
-  register: rpi3_network_dep_result
-  until: rpi3_network_dep_result is succeeded
+  register: rpi_network_dep_result
+  until: rpi_network_dep_result is succeeded
   become: yes
   tags:
-  - rpi3_network
-  - rpi3_network_dependencies
+  - rpi_network
+  - rpi_network_dependencies

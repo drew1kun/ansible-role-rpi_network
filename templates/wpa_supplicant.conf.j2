@@ -1,5 +1,5 @@
 #If no 'id_str' given, the value will be 'default'
-{% for AP in rpi3_network_psk.results %}
+{% for AP in rpi_network_psk.results %}
 {# If the passphrase is set - password protected network: #}
 {% if AP.stdout_lines is defined %}
 {{ AP.stdout_lines[1] }}

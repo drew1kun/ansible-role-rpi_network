@@ -1,17 +1,17 @@
 ---
-# handlers file for rpi3_network
+# handlers file for rpi_network
 
-- name: '[rpi3_network] Reload systemd daemon'
+- name: '[rpi_network] Reload systemd daemon'
   systemd: daemon_reload=yes
   listen: Restart networking service
   become: yes
-  when: rpi3_network_wifi_if is not defined or rpi3_network_wifi_if.rc == 0
+  when: rpi_network_wifi_if is not defined or rpi_network_wifi_if.rc == 0
 
-- name: '[rpi3_network] Restart networking service'
+- name: '[rpi_network] Restart networking service'
   service:
     name: networking
     state: restarted
     enabled: yes
   listen: Restart networking service
   become: yes
-  when: rpi3_network_wifi_if is not defined or rpi3_network_wifi_if.rc == 0
+  when: rpi_network_wifi_if is not defined or rpi_network_wifi_if.rc == 0

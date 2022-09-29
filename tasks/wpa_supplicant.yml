@@ -1,57 +1,58 @@
 ---
 - name: "[wpa_supplicant] Import tasks from dependencies.yml"
   import_tasks: dependencies.yml
-  tags: rpi3_network
+  tags: rpi_network
 
 - name: "[wpa_supplicant] Ensure that passphrases have appropriate length or 0 (for unsecured networks)"
   fail:
     msg: "Passphrase must be either 8-63 characters or left undefined if network in unsecured"
-  with_items: "{{ rpi3_network_wifi_APs }}"
+  with_items: "{{ rpi_network_wifi_APs }}"
   no_log: yes
   when:
   - item.essid|length != 0  # SSID is required (see wpa_supplicant.conf man pages)
   - ( item.passphrase|length < 8 and item.passphrase|length != 0 ) or item.passphrase|length > 63
-  tags: rpi3_network
+  tags: rpi_network
 
 - name: "[wpa_supplicant] Encode passphrases to 254 bit PSK"
   # VERY IMPORTANT: use ' symbols around passphrase variables.
   # Otherwise some special characters like $ will be echoed by shell as random numbers.
   shell: echo '{{ item.passphrase }}' | wpa_passphrase '{{ item.essid }}'
-  register: rpi3_network_psk
-  with_items: "{{ rpi3_network_wifi_APs }}"
+  register: rpi_network_psk
+  with_items: "{{ rpi_network_wifi_APs }}"
   changed_when: false
   no_log: yes  # Don't output the WPA passphrases
   when:
   - item.passphrase|length != 0
   become: yes
-  tags: rpi3_network
+  tags: rpi_network
 
-- name: "[wpa_supplicant] Generate {{ rpi3_network_wpa_supplicant_conf }}"
+- name: "[wpa_supplicant] Generate {{ rpi_network_wpa_supplicant_conf }}"
   template:
     src: wpa_supplicant.conf.j2
-    dest: "{{ rpi3_network_wpa_supplicant_conf }}"
+    dest: "{{ rpi_network_wpa_supplicant_conf }}"
     mode: 0644
     owner: root
     group: root
   become: yes
-  tags: rpi3_network
+  notify: Restart networking service
+  tags: rpi_network
 
-- name: "[wpa_supplicant] Check if {{ rpi3_network_WLAN }} interface exists"
-  command: grep "{{ rpi3_network_WLAN }}" /proc/net/dev
-  register: rpi3_network_wifi_if
+- name: "[wpa_supplicant] Check if {{ rpi_network_WLAN }} interface exists"
+  command: grep "{{ rpi_network_WLAN }}" /proc/net/dev
+  register: rpi_network_wifi_if
   become: yes
   failed_when: false
   changed_when: false
-  tags: rpi3_network
+  tags: rpi_network
 
 # haven't find a solution without reboot
-- name: "[wpa_supplicant] Reboot the managed host for wifi driver to recognize {{ rpi3_network_WLAN }} interface"
+- name: "[wpa_supplicant] Reboot the managed host for wifi driver to recognize {{ rpi_network_WLAN }} interface"
   shell: 'sleep 1 && shutdown -r now "Reboot triggered by Ansible" && sleep 1'
   async: 1
   poll: 0
   become: yes
-  when: rpi3_network_wifi_if.rc != 0
-  tags: rpi3_network
+  when: rpi_network_wifi_if.rc != 0
+  tags: rpi_network
 
 # ansible_ssh_host variable is set in ansible inventory (hosts) file
 - name: "[wpa_supplicant] Waiting for managed host to come back after reboot"
@@ -60,5 +61,5 @@
     port: 22
     delay: 1
   become: no
-  when: rpi3_network_wifi_if.rc != 0
-  tags: rpi3_network
+  when: rpi_network_wifi_if.rc != 0
+  tags: rpi_network

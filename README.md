@@ -1,4 +1,4 @@
-Ansible role: rpi3_network
+Ansible role: rpi_network
 =========
 
 [![MIT licensed][mit-badge]][mit-link]
@@ -26,19 +26,19 @@ Role Variables
 --------------
 | Variables | Description | Default|
 |-----------|-------------|--------|
-| **rpi3_network_LAN** | Wired LAN interface | `eth0` |
-| **rpi3_network_WLAN** | Wireless LAN interface | `wlan0` |
-| **rpi3_network_LAN_ip** | LAN interface Static IP address | `192.168.2.2` |
-| **rpi3_network_LAN_netmask** | LAN interface subnet mask | `255.255.255.0` |
-| **rpi3_network_LAN_gw** | Default Gateway IP address for LAN interface | `192.168.2.1` |
-| **rpi3_network_wireless** | Configure wireless connections using wpa_supplicant | `yes` |
-| **rpi3_network_wpa_supplicant_conf** | Path to wpa_supplicant configuration file | `/etc/wpa_supplicant/wpa_supplicant.conf` |
-| **rpi3_network_wifi_APs** | List of wireless Access Points to be configured in wpa_supplicant | see [`defaults/main.yml`](defaults/main.yml#L20) |
+| **rpi_network_LAN** | Wired LAN interface | `eth0` |
+| **rpi_network_WLAN** | Wireless LAN interface | `wlan0` |
+| **rpi_network_LAN_ip** | LAN interface Static IP address | `192.168.2.2` |
+| **rpi_network_LAN_netmask** | LAN interface subnet mask | `255.255.255.0` |
+| **rpi_network_LAN_gw** | Default Gateway IP address for LAN interface | `192.168.2.1` |
+| **rpi_network_wireless** | Configure wireless connections using wpa_supplicant | `yes` |
+| **rpi_network_wpa_supplicant_conf** | Path to wpa_supplicant configuration file | `/etc/wpa_supplicant/wpa_supplicant.conf` |
+| **rpi_network_wifi_APs** | List of wireless Access Points to be configured in wpa_supplicant | see [`defaults/main.yml`](defaults/main.yml#L20) |
 
 
 **ATTENTION!**
-If **rpi3_network_wireless** is set to `yes`, then
-make sure you override the **vault_rpi3_network_wifi_APs** var as it contains a sensitive data for your wireless networks,
+If **rpi_network_wireless** is set to `yes`, then
+make sure you override the **vault_rpi_network_wifi_APs** var as it contains a sensitive data for your wireless networks,
 such as WPA passphrase and network ESSID...
 
 It is highly recommended to encrypt with [ansible-vault][ansible-vault-link].
@@ -64,14 +64,14 @@ Example Playboouk
   - vars/vault.yml
 
   roles:
-  - role: drew1kun.rpi3_network
-    rpi3_network_LAN_ip: 10.0.0.1
-    rpi3_network_LAN: 10.0.0.254
-    rpi3_network_wifi_APs:
+  - role: drew1kun.rpi_network
+    rpi_network_LAN_ip: 10.0.0.1
+    rpi_network_LAN: 10.0.0.254
+    rpi_network_wifi_APs:
     - id_str: home
       hidden: no
-      essid: "{{ vault_bootstrap_core__rpi3_network_wifi_APs[0].essid }}"
-      passphrase: "{{ vault_bootstrap_core__rpi3_network_wifi_APs[0].passphrase }}"
+      essid: "{{ vault_bootstrap_core__rpi_network_wifi_APs[0].essid }}"
+      passphrase: "{{ vault_bootstrap_core__rpi_network_wifi_APs[0].passphrase }}"
       priority: 10
     when: ansible_os_family == 'Debian'
 ```
@@ -79,7 +79,7 @@ Example Playboouk
 *vars/vault.yml*:
 
 ```yaml
-vault_bootstrap_core__rpi3_network_wifi_APs:
+vault_bootstrap_core__rpi_network_wifi_APs:
 # only sensitive stuff goes here:
 - essid: YourSensitiveESSID
   passphrase: YourSecureWPA_Passphrase
@@ -95,7 +95,7 @@ Author Information
 
 Andrew Shagayev | [e-mail](mailto:drewshg@gmail.com)
 
-[role-badge]: https://img.shields.io/badge/role-drew--kun.rpi3__network-green.svg
-[galaxy-link]: https://galaxy.ansible.com/drew1kun/rpi3_network/
+[role-badge]: https://img.shields.io/badge/role-drew--kun.rpi__network-green.svg
+[galaxy-link]: https://galaxy.ansible.com/drew1kun/rpi_network/
 [mit-badge]: https://img.shields.io/badge/license-MIT-blue.svg
-[mit-link]: https://raw.githubusercontent.com/drew1kun/ansible-rpi3_network/master/LICENSE
+[mit-link]: https://raw.githubusercontent.com/drew1kun/ansible-rpi_network/master/LICENSE
