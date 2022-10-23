@@ -3,20 +3,14 @@ galaxy_info:
   role_name: rpi_network
   author: Andrew Shagayev
   description: Ansible role for Raspberry Pi basic network configuration.
-
   license: MIT
-
   min_ansible_version: 1.2
-
-  github_branch: master
-
+  github_branch: main
   platforms:
     - name: Debian
       versions:
         - jessie
         - bullseye
-
-
   galaxy_tags:
     - raspberrypi
     - raspberry_pi_os
@@ -26,5 +20,4 @@ galaxy_info:
     - networking
     - jessie
     - bullseye
-
 dependencies: []

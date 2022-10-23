@@ -1,0 +1,15 @@
+[connection]
+id={{ rpi_network_LAN }}-static
+uuid=2BCD1DE6-FAA5-4165-9AC9-F2A9D2A05297
+type=ethernet
+interface-name={{ rpi_network_LAN }}
+autoconnect=true
+
+[ipv4]
+method=manual
+address1={{ rpi_network_LAN_ip }}/{{ rpi_network_LAN_cidr }},{{ rpi_network_LAN_gw }}
+dns={{ rpi_network_LAN_dns }}
+never-default=false
+
+[ipv6]
+method=ignore

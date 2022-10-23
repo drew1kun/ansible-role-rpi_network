@@ -8,6 +8,4 @@
   register: rpi_network_dep_result
   until: rpi_network_dep_result is succeeded
   become: yes
-  tags:
-  - rpi_network
-  - rpi_network_dependencies
+  tags: [ 'rpi_network', 'rpi_network_dependencies' ]

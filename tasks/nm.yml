@@ -1,0 +1,30 @@
+---
+- name: "[nm] Generate /etc/NetworkManager/system-connections/{{ rpi_network_LAN }}-static.nmconnection"
+  ansible.builtin.template:
+    src: if-static.nmconnection.j2
+    dest: "/etc/NetworkManager/system-connections/{{ rpi_network_LAN }}-static.nmconnection"
+    owner: root
+    group: root
+    mode: 0600
+  #notify: Restart networking service
+  become: true
+  register: rpi_network_nm_confiugred
+  tags: [ 'rpi_network', 'rpi_network_manager' ]
+
+
+- name: "[nm] README!"
+  debug:
+    msg: |
+      The new Network Manager system connection was created:
+      /etc/NetworkManager/system-connections/{{ rpi_network_LAN }}-static.nmconnection
+      To enable it run:
+         sudo nmcli connection reload
+         sudo nmcli connection up {{ rpi_network_LAN }}-static
+      This will enable the configured Static IP on the LAN (Wired) interface: {{ rpi_network_LAN }}
+      This is useful for direct connection (e.g. on MacOS using Internet Sharing feature)
+      To use DHCP, run:
+         sudo nmcli connection reload
+         sudo nmcli connection down {{ rpi_network_LAN }}-static
+      The {{ rpi_network_LAN }} should have the DHCP-assigned IP now.
+  when: rpi_network_nm_confiugred.changed
+  tags: [ 'rpi_network', 'rpi_network_manager' ]

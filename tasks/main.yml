@@ -1,59 +1,28 @@
 ---
 # tasks file for rpi_network
+#
+- name: '[main] Include tasks from dependencies.yml'
+  include_tasks: dependencies.yml
+  tags: [ 'rpi_network', 'rpi_network_dependencies' ]
 
-- name: '[main] Check if /lib/udev/rules.d/75-persistent-net-generator.rules exists'
-  stat: path=/lib/udev/rules.d/75-persistent-net-generator.rules
-  register: rpi_network_75_persistent_net_generator_rules
-  tags: rpi_network
+- name: '[main] Include tasks from nm.yml: set up /etc/NetworkManager/system-connections'
+  include_tasks: nm.yml
+  when: rpi_network_manager
+  tags: [ 'rpi_network', 'rpi_network_manager' ]
 
-- name: '[main] Check /lib/udev/rules.d/75-persistent-net-generator.rules'
-  command: >
-    fgrep -q 'KERNEL!="eth*[1-9]|ath*|wlan*[1-9]|msh*|ra*|sta*|ctc*|lcs*|hsi*"' \
-      /lib/udev/rules.d/75-persistent-net-generator.rules
-  register: result
-  #ignore_errors: yes
-  failed_when: false
-  changed_when: false
-  become: yes
-  when: rpi_network_75_persistent_net_generator_rules.stat.exists
-  tags: rpi_network
-
-- name: '[main] Comment old pattern in 75-persistent-net-generator.rules'
-  replace:
-    path: /lib/udev/rules.d/75-persistent-net-generator.rules
-    regexp: '^(KERNEL!=".*$)'
-    replace: '#\1'
-  become: yes
-  when:
-  - rpi_network_75_persistent_net_generator_rules.stat.exists
-  - result.rc != 0 # result|failed can't be used because we use failed_when: false
-  notify: Restart networking service
-  tags: rpi_network
-
-- name: '[main] Insert right pattern into 75-persistent-net-generator.rules'
-  lineinfile:
-    path: /lib/udev/rules.d/75-persistent-net-generator.rules
-    insertafter: '^#KERNEL!=".*$'
-    line: 'KERNEL!="eth*[1-9]|ath*|wlan*[1-9]|msh*|ra*|sta*|ctc*|lcs*|hsi*" \'
-  become: yes
-  when:
-  - rpi_network_75_persistent_net_generator_rules.stat.exists
-  - result.rc != 0
-  notify: Restart networking service
-  tags: rpi_network
-
-- name: '[main] Generate /etc/network/interfaces'
-  template:
-    src: interfaces.j2
-    dest: /etc/network/interfaces
-  notify: Restart networking service
-  become: yes
-  tags: rpi_network
+- name: '[main] Include tasks from legacy.yml: set up /etc/network/interfaces'
+  include_tasks: legacy.yml
+  when: rpi_network_legacy
+  tags: [ 'rpi_network', 'rpi_network_legacy' ]
 
 - name: '[main] Include tasks from wpa_supplicant.yml'
   include_tasks: wpa_supplicant.yml
   when: rpi_network_wireless
-  tags: rpi_network
+  tags: [ 'rpi_network', 'rpi_network_wireless' ]
 
 - meta: flush_handlers
-  tags: rpi_network
+  tags:
+  - rpi_network
+  - rpi_network_legacy
+  - rpi_network_manager
+  - rpi_network_wireless

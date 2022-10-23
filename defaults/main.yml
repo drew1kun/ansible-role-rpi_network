@@ -1,19 +1,18 @@
 ---
 # defaults file for rpi_network
 
+rpi_network_manager: true
+rpi_network_legacy: false     # /etc/network/interfaces
+rpi_network_wireless: false   # Set up wireless? Include wpa_supplicant.yml tasks?
+
 rpi_network_LAN: eth0
 rpi_network_WLAN: wlan0
-
-rpi_network_LAN_ip: 192.168.3.2
+rpi_network_LAN_ip: 192.168.2.2
+rpi_network_LAN_cidr: 24
 rpi_network_LAN_netmask: 255.255.255.0
-rpi_network_LAN_gw: 192.168.3.1
-
-
-# WPA Supplicant
-rpi_network_wireless: true    # Set up wireless? Include wpa_supplicant.yml tasks?
-
+rpi_network_LAN_gw: 192.168.2.1
+rpi_network_LAN_dns: 9.9.9.9
 rpi_network_wpa_supplicant_conf: /etc/wpa_supplicant/wpa_supplicant.conf
-
 # The list of wifi networks to be configured in wpa_supplicant.conf
 # if no id_str specified, it will be set to 'default' in /etc/network/interfaces
 # NOTE: please make sure you override this in your playbooks and encrypt all sensetive data with ansible-vault
